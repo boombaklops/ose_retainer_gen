@@ -1,4 +1,3 @@
-#made by boombaklops. modify as you please, but gimme credit :)
 from random import randint, choice
 
 def generate_equipment(job):
