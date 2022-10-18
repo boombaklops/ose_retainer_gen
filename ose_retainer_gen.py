@@ -1,3 +1,4 @@
+#made by boombaklops. modify as you please, but gimme credit :)
 from random import randint, choice
 
 def generate_equipment(job):
@@ -25,14 +26,14 @@ def generate_equipment(job):
         'crossbow 1d6'
     ]
     armor = [
-        'leather armor AC 12',
-        'chain armor AC 14',
-        'plate armor AC 16'
+        'leather armor AC 7 [12]',
+        'chain armor AC 5 [14]',
+        'plate armor AC 3 [16]'
     ]
 
     inventory = []
     if job == 'Acrobat':
-        inventory.append('leather armor AC 12')
+        inventory.append('leather armor AC 7 [12]')
         inventory.append(choice([
             'short bow 1d6',
             'long bow 1d6',
@@ -45,17 +46,17 @@ def generate_equipment(job):
             'staff 1d4'
         ]))
     if job == 'Assassin':
-        inventory.append('leather armor AC 12')
+        inventory.append('leather armor AC 7 [12]')
         weapon = choice(two_handed_weapons + one_handed_weapons)
         inventory.append(weapon)
         if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
     if job == 'Barbarian' or job == 'Ranger':
-        inventory.append(choice(['leather armor AC 12', 'chain armor AC 14']))
+        inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
         weapon = choice(two_handed_weapons + one_handed_weapons)
         inventory.append(weapon)
         if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
     if job == 'Bard':
-        inventory.append(choice(['leather armor AC 12', 'chain armor AC 14']))
+        inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
         weapon = choice(['short bow 1d6', 'long bow 1d6', 'crossbow 1d6'] + one_handed_weapons)
         inventory.append(weapon)
     if job == 'Cleric':
@@ -70,7 +71,7 @@ def generate_equipment(job):
         inventory.append(weapon)
         if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
     if job == 'Druid':
-        inventory.append('leather armor AC 12')
+        inventory.append('leather armor AC 7 [12]')
         weapon = choice([
         'club 1d4',
         'dagger 1d4',
@@ -88,7 +89,7 @@ def generate_equipment(job):
     if job == 'Illusionist' or job == 'Magic-User':
         inventory.append(choice(['dagger 1d4', 'staff 1d4']))
     if job == 'Knight':
-        inventory.append(choice(['chain armor AC 14', 'plate armor AC 16']))
+        inventory.append(choice(['chain armor AC 5 [14]', 'plate armor AC 3 [16]']))
         weapon = choice([
         'club 1d4',
         'dagger 1d4',
@@ -108,7 +109,7 @@ def generate_equipment(job):
         inventory.append(weapon)
         if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
     if job == 'Thief':
-        inventory.append('leather armor AC 12')
+        inventory.append('leather armor AC 7 [12]')
         weapon = choice(two_handed_weapons + one_handed_weapons)
         inventory.append(weapon)
 
@@ -304,17 +305,22 @@ class Retainer():
 
     def get_sheet(self):
         #figure out armor class
+        descending_armor_class = 9
         armor_class = 10
-        if 'leather armor AC 12' in self.inventory:
+        if 'leather armor AC 7 [12]' in self.inventory:
+            descending_armor_class = 7
             armor_class = 12
-        if 'chain armor AC 14' in self.inventory:
+        if 'chain armor AC 5 [14]' in self.inventory:
+            descending_armor_class = 5
             armor_class = 14
-        if 'leather armor AC 16' in self.inventory:
+        if 'plate armor AC 3 [16]' in self.inventory:
+            descending_armor_class = 3
             armor_class = 16
         if 'shield AC +1' in self.inventory:
+            descending_armor_class -= 1
             armor_class += 1
         inventory = '\n'.join(self.inventory)
-        return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {armor_class}\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD {self.death_save} W {self.wand_save} P {self.poison_save} B {self.breath_save} S {self.spell_save}\nEquipment:\n{inventory}\n\n"
+        return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {descending_armor_class} [{armor_class}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD {self.death_save} W {self.wand_save} P {self.poison_save} B {self.breath_save} S {self.spell_save}\nEquipment:\n{inventory}\n\n"
 
 try:
     quota = int(input("How many retainers to generate? Enter to exit.\n"))
