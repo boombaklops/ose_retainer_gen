@@ -1,132 +1,10 @@
 #made by boombaklops. modify as you please, but gimme credit :)
 from random import randint, choice
 
-def generate_equipment(job):
-    one_handed_weapons = [
-        'club 1d4',
-        'dagger 1d4',
-        'hand axe 1d6',
-        'javelin 1d4',
-        'mace 1d6',
-        'short sword 1d6',
-        'silver dagger 1d4',
-        'sling 1d4',
-        'spear 1d6',
-        'sword 1d8',
-        'war hammer 1d6'
-    ]
-    two_handed_weapons = [
-        'battle axe 1d8',
-        'staff 1d4',
-        'two-handed sword 1d10',
-        'short bow 1d6',
-        'polearm 1d10',
-        'long bow 1d6',
-        'lance 1d6',
-        'crossbow 1d6'
-    ]
-    armor = [
-        'leather armor AC 7 [12]',
-        'chain armor AC 5 [14]',
-        'plate armor AC 3 [16]'
-    ]
-
-    inventory = []
-    if job == 'Acrobat':
-        inventory.append('leather armor AC 7 [12]')
-        inventory.append(choice([
-            'short bow 1d6',
-            'long bow 1d6',
-            'crossbow 1d6',
-            'dagger 1d4',
-            'sword 1d8',
-            'short sword 1d6',
-            'polearm 1d10',
-            'spear 1d6',
-            'staff 1d4'
-        ]))
-    if job == 'Assassin':
-        inventory.append('leather armor AC 7 [12]')
-        weapon = choice(two_handed_weapons + one_handed_weapons)
-        inventory.append(weapon)
-        if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
-    if job == 'Barbarian' or job == 'Ranger':
-        inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
-        weapon = choice(two_handed_weapons + one_handed_weapons)
-        inventory.append(weapon)
-        if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
-    if job == 'Bard':
-        inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
-        weapon = choice(['short bow 1d6', 'long bow 1d6', 'crossbow 1d6'] + one_handed_weapons)
-        inventory.append(weapon)
-    if job == 'Cleric':
-        inventory.append(choice(armor))
-        weapon = choice([
-        'club 1d4',
-        'mace 1d6',
-        'sling 1d4',
-        'war hammer 1d6',
-        'staff 1d4'
-        ])
-        inventory.append(weapon)
-        if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
-    if job == 'Druid':
-        inventory.append('leather armor AC 7 [12]')
-        weapon = choice([
-        'club 1d4',
-        'dagger 1d4',
-        'sling 1d4',
-        'spear 1d6',
-        'staff 1d4'
-        ])
-        inventory.append(weapon)
-        if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
-    if job == 'Fighter' or job == 'Paladin':
-        inventory.append(choice(armor))
-        weapon = choice(two_handed_weapons + one_handed_weapons)
-        inventory.append(weapon)
-        if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
-    if job == 'Illusionist' or job == 'Magic-User':
-        inventory.append(choice(['dagger 1d4', 'staff 1d4']))
-    if job == 'Knight':
-        inventory.append(choice(['chain armor AC 5 [14]', 'plate armor AC 3 [16]']))
-        weapon = choice([
-        'club 1d4',
-        'dagger 1d4',
-        'hand axe 1d6',
-        'mace 1d6',
-        'short sword 1d6',
-        'silver dagger 1d4',
-        'spear 1d6',
-        'sword 1d8',
-        'war hammer 1d6'
-        'battle axe 1d8',
-        'staff 1d4',
-        'two-handed sword 1d10',
-        'polearm 1d10',
-        'lance 1d6'
-        ])
-        inventory.append(weapon)
-        if weapon not in two_handed_weapons and weapon != 'sling 1d4': inventory.append('shield AC +1')
-    if job == 'Thief':
-        inventory.append('leather armor AC 7 [12]')
-        weapon = choice(two_handed_weapons + one_handed_weapons)
-        inventory.append(weapon)
-
-    return inventory
-
 class Retainer():
 
     def __init__(self):
-        #stats
-        self.strength = randint(1, 6) + randint(1, 6) + randint(1, 6)
-        self.intelligence = randint(1, 6) + randint(1, 6) + randint(1, 6)
-        self.wisdom = randint(1, 6) + randint(1, 6) + randint(1, 6)
-        self.dexterity = randint(1, 6) + randint(1, 6) + randint(1, 6)
-        self.constitution = randint(1, 6) + randint(1, 6) + randint(1, 6)
-        self.charisma = randint(1, 6) + randint(1, 6) + randint(1, 6)
-
-        #race and class selection
+        #preparing lists for later use
         races = [
             'Half-Orc',
             'Human'
@@ -135,7 +13,44 @@ class Retainer():
             'Fighter',
             'Thief'
         ]
-        #eligibility checks
+        one_handed_weapons = [
+            'club 1d4',
+            'dagger 1d4',
+            'hand axe 1d6',
+            'javelin 1d4',
+            'mace 1d6',
+            'short sword 1d6',
+            'silver dagger 1d4',
+            'sling 1d4',
+            'spear 1d6',
+            'sword 1d8',
+            'war hammer 1d6'
+        ]
+        two_handed_weapons = [
+            'battle axe 1d8',
+            'staff 1d4',
+            'two-handed sword 1d10',
+            'short bow 1d6',
+            'polearm 1d10',
+            'long bow 1d6',
+            'lance 1d6',
+            'crossbow 1d6'
+        ]
+        armor = [
+            'leather armor AC 7 [12]',
+            'chain armor AC 5 [14]',
+            'plate armor AC 3 [16]'
+        ]
+
+        #stats
+        self.strength = randint(1, 6) + randint(1, 6) + randint(1, 6)
+        self.intelligence = randint(1, 6) + randint(1, 6) + randint(1, 6)
+        self.wisdom = randint(1, 6) + randint(1, 6) + randint(1, 6)
+        self.dexterity = randint(1, 6) + randint(1, 6) + randint(1, 6)
+        self.constitution = randint(1, 6) + randint(1, 6) + randint(1, 6)
+        self.charisma = randint(1, 6) + randint(1, 6) + randint(1, 6)
+
+        #race selection
         if self.intelligence >= 9:races.extend(['Drow', 'Elf'])
         if self.intelligence >= 9 and self.constitution >= 9: races.extend(['Duergar', 'Gnome'])
         if self.constitution >= 9: races.extend(['Dwarf', 'Svirfneblin'])
@@ -143,6 +58,7 @@ class Retainer():
         if self.dexterity >= 9 and self.constitution >= 9: races.append('Halfling')
         #choose a race
         self.race = choice(races)
+
         #modify stats, then class eligibility checks
         if self.race == 'Drow':
             self.constitution -= 1
@@ -195,132 +111,288 @@ class Retainer():
         self.job = choice(jobs)
 
         #job-related generation
+        self.inventory = []
+        self.spells_known = []
         if self.job == 'Acrobat':
-            self.hp = randint(1, 4)
+            self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
             self.poison_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append('leather armor AC 7 [12]')
+            self.inventory.append(choice([
+                'short bow 1d6',
+                'long bow 1d6',
+                'crossbow 1d6',
+                'dagger 1d4',
+                'sword 1d8',
+                'short sword 1d6',
+                'polearm 1d10',
+                'spear 1d6',
+                'staff 1d4'
+            ]))
+
         if self.job == 'Assassin':
-            self.hp = randint(1, 4)
+            self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
             self.poison_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Neutral', 'Chaotic'])
+            self.inventory.append('leather armor AC 7 [12]')
+            weapon = choice(two_handed_weapons + one_handed_weapons)
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+
         if self.job == 'Barbarian':
-            self.hp = randint(1, 8)
+            self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 10
             self.wand_save = 13
             self.poison_save = 12
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
+            weapon = choice(two_handed_weapons + one_handed_weapons)
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+
         if self.job == 'Bard':
-            self.hp = randint(1, 6)
+            self.hp = randint(1, 6) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
             self.poison_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
+            weapon = choice(['short bow 1d6', 'long bow 1d6', 'crossbow 1d6'] + one_handed_weapons)
+            self.inventory.append(weapon)
+
         if self.job == 'Cleric':
-            self.hp = randint(1, 6)
+            self.hp = randint(1, 6) + self.get_conmod()
             self.death_save = 11
             self.wand_save = 12
             self.poison_save = 14
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(armor))
+            weapon = choice([
+            'club 1d4',
+            'mace 1d6',
+            'sling 1d4',
+            'war hammer 1d6',
+            'staff 1d4'
+            ])
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+
         if self.job == 'Druid':
-            self.hp = randint(1, 6)
+            self.hp = randint(1, 6) + self.get_conmod()
             self.death_save = 11
             self.wand_save = 12
             self.poison_save = 14
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = 'Neutral'
+            self.inventory.append('leather armor AC 7 [12]')
+            weapon = choice([
+            'club 1d4',
+            'dagger 1d4',
+            'sling 1d4',
+            'spear 1d6',
+            'staff 1d4'
+            ])
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+            druid_spells = [
+                'Animal Friendship',
+                'Detect Danger',
+                'Entangle',
+                'Faerie Fire',
+                'Invisibility to Animals',
+                'Locate Plant or Animal',
+                'Predict Weather',
+                'Speak with Animals'
+            ]
+            self.spells_known.append(choice(druid_spells))
+
         if self.job == 'Fighter':
-            self.hp = randint(1, 8)
+            self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 12
             self.wand_save = 13
             self.poison_save = 14
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(armor))
+            weapon = choice(two_handed_weapons + one_handed_weapons)
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+
         if self.job == 'Illusionist':
-            self.hp = randint(1, 4)
+            self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
             self.poison_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(['dagger 1d4', 'staff 1d4']))
+            illusionist_spells = [
+                'Auditory Illusion',
+                'Chromatic Orb',
+                'Colour Spray',
+                'Dancing Lights',
+                'Detect Illusion',
+                'Glamour',
+                'Hypnotism',
+                'Light',
+                'Phantasmal Force',
+                'Read Magic',
+                'Wall of Fog',
+                'Spook'
+            ]
+            self.spells_known.append(choice(illusionist_spells))
+
         if self.job == 'Knight':
-            self.hp = randint(1, 8)
+            self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 12
             self.wand_save = 13
             self.poison_save = 14
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(['chain armor AC 5 [14]', 'plate armor AC 3 [16]']))
+            weapon = choice([
+            'club 1d4',
+            'dagger 1d4',
+            'hand axe 1d6',
+            'mace 1d6',
+            'short sword 1d6',
+            'silver dagger 1d4',
+            'spear 1d6',
+            'sword 1d8',
+            'war hammer 1d6'
+            'battle axe 1d8',
+            'staff 1d4',
+            'two-handed sword 1d10',
+            'polearm 1d10',
+            'lance 1d6'
+            ])
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+
         if self.job == 'Magic-User':
-            self.hp = randint(1, 4)
+            self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
             self.poison_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append(choice(['dagger 1d4', 'staff 1d4']))
+            magic_user_spells = [
+                'Charm Person',
+                'Detect Magic',
+                'Floating Disc',
+                'Hold Portal',
+                'Light',
+                'Magic Missile',
+                'Protection from Evil',
+                'Read Languages',
+                'Read Magic',
+                'Sleep',
+                'Shield',
+                'Ventriloquism'
+            ]
+            self.spells_known.append(choice(magic_user_spells))
+
         if self.job == 'Paladin':
-            self.hp = randint(1, 8)
+            self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 10
             self.wand_save = 11
             self.poison_save = 12
             self.breath_save = 13
             self.spell_save = 14
             self.alignment = 'Lawful'
+            self.inventory.append(choice(armor))
+            weapon = choice(two_handed_weapons + one_handed_weapons)
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
+
         if self.job == 'Ranger':
-            self.hp = randint(1, 8)
+            self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 12
             self.wand_save = 13
             self.poison_save = 14
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral'])
+
         if self.job == 'Thief':
-            self.hp = randint(1, 4)
+            self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
             self.poison_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
+            self.inventory.append('leather armor AC 7 [12]')
+            weapon = choice(two_handed_weapons + one_handed_weapons)
+            self.inventory.append(weapon)
+        
+        #hp check
+        if self.hp < 1: self.hp = 1
 
-        #equipment
-        self.inventory = generate_equipment(self.job)
+        #figure out armor class
+        self.descending_armor_class = 9
+        self.ascending_armor_class = 10
+        if 'leather armor AC 7 [12]' in self.inventory:
+            self.descending_armor_class = 7
+            self.ascending_armor_class = 12
+        if 'chain armor AC 5 [14]' in self.inventory:
+            self.descending_armor_class = 5
+            self.ascending_armor_class = 14
+        if 'plate armor AC 3 [16]' in self.inventory:
+            self.descending_armor_class = 3
+            self.ascending_armor_class = 16
+        if 'shield AC +1' in self.inventory:
+            self.descending_armor_class -= 1
+            self.ascending_armor_class += 1
+
+    def get_conmod(self):
+        if self.constitution == 3: conmod = -3
+        if self.constitution >= 4: conmod = -2
+        if self.constitution >= 6: conmod = -1
+        if self.constitution >= 9: conmod = 0
+        if self.constitution >= 13: conmod = 1
+        if self.constitution >= 16: conmod = 2
+        if self.constitution == 18: conmod = 3
+        return conmod
+
+    def get_dexmod(self):
+        if self.dexterity == 3: dexmod = -3
+        if self.dexterity >= 4: dexmod = -2
+        if self.dexterity >= 6: dexmod = -1
+        if self.dexterity >= 9: dexmod = 0
+        if self.dexterity >= 13: dexmod = 1
+        if self.dexterity >= 16: dexmod = 2
+        if self.dexterity == 18: dexmod = 3
+        return dexmod
 
     def get_sheet(self):
-        #figure out armor class
-        descending_armor_class = 9
-        armor_class = 10
-        if 'leather armor AC 7 [12]' in self.inventory:
-            descending_armor_class = 7
-            armor_class = 12
-        if 'chain armor AC 5 [14]' in self.inventory:
-            descending_armor_class = 5
-            armor_class = 14
-        if 'plate armor AC 3 [16]' in self.inventory:
-            descending_armor_class = 3
-            armor_class = 16
-        if 'shield AC +1' in self.inventory:
-            descending_armor_class -= 1
-            armor_class += 1
-        inventory = '\n'.join(self.inventory)
-        return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {descending_armor_class} [{armor_class}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD {self.death_save} W {self.wand_save} P {self.poison_save} B {self.breath_save} S {self.spell_save}\nEquipment:\n{inventory}\n\n"
+        inventory = ', '.join(self.inventory)
+        if len(self.spells_known) > 0:
+            spell_list = ', '.join(self.spells_known)
+            spells = f"Spells: {spell_list}"
+            return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {self.descending_armor_class - self.get_dexmod()} [{self.ascending_armor_class + self.get_dexmod()}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD{self.death_save} W{self.wand_save} P{self.poison_save} B{self.breath_save} S{self.spell_save}\nEquipment: {inventory}\n{spells}"
+        else:
+            return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {self.descending_armor_class - self.get_dexmod()} [{self.ascending_armor_class + self.get_dexmod()}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD{self.death_save} W{self.wand_save} P{self.poison_save} B{self.breath_save} S{self.spell_save}\nEquipment: {inventory}"
 
 try:
     quota = int(input("How many retainers to generate? Enter to exit.\n"))
@@ -332,8 +404,8 @@ file = open('retainers.txt', 'a')
 
 for x in range(quota):
     retainer = Retainer()
-    print(retainer.get_sheet())
-    file.write(retainer.get_sheet())
+    print(retainer.get_sheet() + '\n')
+    file.write(retainer.get_sheet() + '\n\n')
 
 file.close()
 print('Retainers exported to "retainers.txt".')
