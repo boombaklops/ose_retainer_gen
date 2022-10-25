@@ -333,6 +333,10 @@ class Retainer():
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral'])
+            self.inventory.append(choice(['leather armor AC 7 [12]', 'chain armor AC 5 [14]']))
+            weapon = choice(two_handed_weapons + one_handed_weapons)
+            self.inventory.append(weapon)
+            if weapon not in two_handed_weapons and weapon != 'sling 1d4': self.inventory.append('shield AC +1')
 
         if self.job == 'Thief':
             self.hp = randint(1, 4) + self.get_conmod()
@@ -408,4 +412,4 @@ for x in range(quota):
     file.write(retainer.get_sheet() + '\n\n')
 
 file.close()
-print('Retainers exported to "retainers.txt".')
+input('Retainers exported to "retainers.txt". Press Enter to exit.')
