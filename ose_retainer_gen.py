@@ -117,7 +117,7 @@ class Retainer():
             self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
-            self.poison_save = 13
+            self.paralysis_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -138,7 +138,7 @@ class Retainer():
             self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
-            self.poison_save = 13
+            self.paralysis_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Neutral', 'Chaotic'])
@@ -151,7 +151,7 @@ class Retainer():
             self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 10
             self.wand_save = 13
-            self.poison_save = 12
+            self.paralysis_save = 12
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -164,7 +164,7 @@ class Retainer():
             self.hp = randint(1, 6) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
-            self.poison_save = 13
+            self.paralysis_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -176,7 +176,7 @@ class Retainer():
             self.hp = randint(1, 6) + self.get_conmod()
             self.death_save = 11
             self.wand_save = 12
-            self.poison_save = 14
+            self.paralysis_save = 14
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -195,7 +195,7 @@ class Retainer():
             self.hp = randint(1, 6) + self.get_conmod()
             self.death_save = 11
             self.wand_save = 12
-            self.poison_save = 14
+            self.paralysis_save = 14
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = 'Neutral'
@@ -225,7 +225,7 @@ class Retainer():
             self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 12
             self.wand_save = 13
-            self.poison_save = 14
+            self.paralysis_save = 14
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -238,7 +238,7 @@ class Retainer():
             self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
-            self.poison_save = 13
+            self.paralysis_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -263,7 +263,7 @@ class Retainer():
             self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 12
             self.wand_save = 13
-            self.poison_save = 14
+            self.paralysis_save = 14
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -291,7 +291,7 @@ class Retainer():
             self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
-            self.poison_save = 13
+            self.paralysis_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -316,7 +316,7 @@ class Retainer():
             self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 10
             self.wand_save = 11
-            self.poison_save = 12
+            self.paralysis_save = 12
             self.breath_save = 13
             self.spell_save = 14
             self.alignment = 'Lawful'
@@ -329,7 +329,7 @@ class Retainer():
             self.hp = randint(1, 8) + self.get_conmod()
             self.death_save = 12
             self.wand_save = 13
-            self.poison_save = 14
+            self.paralysis_save = 14
             self.breath_save = 15
             self.spell_save = 16
             self.alignment = choice(['Lawful', 'Neutral'])
@@ -342,7 +342,7 @@ class Retainer():
             self.hp = randint(1, 4) + self.get_conmod()
             self.death_save = 13
             self.wand_save = 14
-            self.poison_save = 13
+            self.paralysis_save = 13
             self.breath_save = 16
             self.spell_save = 15
             self.alignment = choice(['Lawful', 'Neutral', 'Chaotic'])
@@ -394,9 +394,9 @@ class Retainer():
         if len(self.spells_known) > 0:
             spell_list = ', '.join(self.spells_known)
             spells = f"Spells: {spell_list}"
-            return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {self.descending_armor_class - self.get_dexmod()} [{self.ascending_armor_class + self.get_dexmod()}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD{self.death_save} W{self.wand_save} P{self.poison_save} B{self.breath_save} S{self.spell_save}\nEquipment: {inventory}\n{spells}"
+            return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {self.descending_armor_class - self.get_dexmod()} [{self.ascending_armor_class + self.get_dexmod()}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD{self.death_save} W{self.wand_save} P{self.paralysis_save} B{self.breath_save} S{self.spell_save}\nEquipment: {inventory}\n{spells}"
         else:
-            return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {self.descending_armor_class - self.get_dexmod()} [{self.ascending_armor_class + self.get_dexmod()}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD{self.death_save} W{self.wand_save} P{self.poison_save} B{self.breath_save} S{self.spell_save}\nEquipment: {inventory}"
+            return f"Level 1 {self.alignment} {self.race} {self.job}\n{self.hp} HP\nAC {self.descending_armor_class - self.get_dexmod()} [{self.ascending_armor_class + self.get_dexmod()}]\nTHAC0 19 (+0)\nSTR {self.strength} INT {self.intelligence} WIS {self.wisdom} DEX {self.dexterity} CON {self.constitution} CHA {self.charisma}\nD{self.death_save} W{self.wand_save} P{self.paralysis_save} B{self.breath_save} S{self.spell_save}\nEquipment: {inventory}"
 
 try:
     quota = int(input("How many retainers to generate? Enter to exit.\n"))
