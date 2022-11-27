@@ -61,22 +61,22 @@ class Retainer():
 
         #modify stats, then class eligibility checks
         if self.race == 'Drow':
-            self.constitution -= 1
-            self.dexterity += 1
+            self.constitution = self.cap_stats(self.constitution - 1)
+            self.dexterity = self.cap_stats(self.dexterity + 1)
             jobs.extend(["Acrobat","Assassin","Cleric","Magic-User"])
             if self.constitution >= 9 and self.wisdom >= 9: jobs.append("Ranger")
             if self.constitution >= 9 and self.dexterity >= 9: jobs.append("Knight")
         if self.race == 'Duergar':
-            self.charisma -= 1
-            self.constitution += 1
+            self.charisma = self.cap_stats(self.charisma - 1)
+            self.constitution = self.cap_stats(self.constitution + 1)
             jobs.extend(['Assassin', 'Cleric'])
         if self.race == 'Dwarf':
-            self.charisma -= 1
-            self.constitution += 1
+            self.charisma = self.cap_stats(self.charisma - 1)
+            self.constitution = self.cap_stats(self.constitution + 1)
             jobs.extend(['Assassin', 'Cleric'])
         if self.race == 'Elf':
-            self.dexterity += 1
-            self.constitution -= 1
+            self.dexterity = self.cap_stats(self.dexterity + 1)
+            self.constitution = self.cap_stats(self.constitution - 1)
             jobs.extend(["Acrobat","Assassin","Cleric","Druid","Magic-User"])
             if self.constitution >= 9 and self.dexterity >= 9: jobs.append("Knight")
             if self.constitution >= 9 and self.wisdom >= 9: jobs.append("Ranger")
@@ -90,12 +90,12 @@ class Retainer():
             if self.charisma >= 9: jobs.append("Paladin")
             if self.constitution >= 9 and self.dexterity >= 9: jobs.append("Knight")
         if self.race == 'Halfling':
-            self.dexterity += 1
-            self.strength -= 1
+            self.dexterity = self.cap_stats(self.dexterity + 1)
+            self.strength = self.cap_stats(self.strength - 1)
             jobs.append('Druid')
         if self.race == 'Half-Orc':
-            self.constitution += 1
-            self.charisma -= 2
+            self.constitution = self.cap_stats(self.constitution + 1)
+            self.charisma = self.cap_stats(self.charisma - 2)
             jobs.extend(['Acrobat', 'Assassin', 'Cleric'])
         if self.race ==  'Human':
             jobs.extend(["Acrobat","Assassin","Cleric","Druid","Magic-User"])
@@ -107,6 +107,7 @@ class Retainer():
             if self.dexterity >= 9: jobs.append("Illusionist")
         if self.race == 'Svirfneblin':
             jobs.extend(["Assassin","Cleric","Druid","Magic-User"])
+        #cap stats
         #choose class
         self.job = choice(jobs)
 
@@ -368,6 +369,11 @@ class Retainer():
         if 'shield AC +1' in self.inventory:
             self.descending_armor_class -= 1
             self.ascending_armor_class += 1
+
+    def cap_stats(self, number):
+        if number < 3: return 3
+        if number > 18: return 18
+        return number
 
     def get_conmod(self):
         if self.constitution == 3: conmod = -3
